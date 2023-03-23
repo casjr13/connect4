@@ -4,6 +4,12 @@ A Node.js console app that my nephew and I are making so he can learn how to pro
 
 # Usage
 
-Install it on your machine by `./install.sh` or `npm install -g .`
+Run the game using `npm start`.
 
-Run the game using `connect4`
+Two players take turns dropping coins onto the board by typing the column number
+and pressing <kbd>Enter</kbd>.
+
+# Plans
+- [ ] Determine if/when someone wins
+- [ ] Introduce a custom CPU player
+- [ ] Refactor into a ReactJS application
