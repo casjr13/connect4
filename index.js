@@ -5,8 +5,8 @@ import promptSync from 'prompt-sync';
 const prompt = promptSync({ sigint: true });
 
 const EMPTY = chalk.gray('.');
-const P1 = chalk.red('O');
-const P2 = chalk.blue('O');
+const P1 = chalk.red('⬤');
+const P2 = chalk.blue('⬤');
 let turn = true;
 const getPiece = () => turn ? P1 : P2;
 
