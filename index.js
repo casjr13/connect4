@@ -33,28 +33,40 @@ function addPiece(col) {
     return false;
   }
 
-  board[c].push(piece ? 'x' : 'o');
+  board[c].push(piece ? chalk.red('x') : chalk.blue('o'));
   piece = !piece;
   return true;
 }
 
 function showBoard() {
-  var show = ["","","","","",""];
+  var show = [[],[],[],[],[],[]];
 
   for (var r = 6; r >= 1; r--) {
     for (var c = 1; c <= 7; c++) {
       var rowNum = 6-r;
       var col = board[c-1];
       var len = col.length;
-      show[rowNum] += r > len ? '.' : col[r-1];
+      show[rowNum].push(r > len ? '.' : col[r-1]);
     }
   }
 
   for (var r in show){
-    console.log(`${r} ${show[r].split('').join(' ')}`)
+    const row = show[r];
+    print(r);
+
+    for (var c in row) {
+      const col = row[c];
+      print(` ${col}`);
+    }
+
+    print('\n');
   }
 
   console.log('  1 2 3 4 5 6 7');
+}
+
+function print(c) {
+  process.stdout.write(c);
 }
 
 showBoard();
