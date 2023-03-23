@@ -1,24 +1,16 @@
 #!/usr/bin/env node
 
-import chalk from 'chalk';
-import promptSync from 'prompt-sync';
+import chalk from "chalk";
+import promptSync from "prompt-sync";
 const prompt = promptSync({ sigint: true });
 
-const EMPTY = chalk.gray('.');
-const P1 = chalk.red('⬤');
-const P2 = chalk.blue('⬤');
+const EMPTY = chalk.gray(".");
+const P1 = chalk.red("⬤");
+const P2 = chalk.blue("⬤");
 let turn = true;
-const getPiece = () => turn ? P1 : P2;
+const getPiece = () => (turn ? P1 : P2);
 
-const board = [
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-];
+const board = [[], [], [], [], [], [], []];
 
 function addPiece(col) {
   if (isNaN(col)) {
@@ -38,29 +30,29 @@ function addPiece(col) {
 }
 
 function showBoard() {
-  var show = [[],[],[],[],[],[]];
+  var show = [[], [], [], [], [], []];
 
   // Convert board into something we can print
   for (var r = 6; r >= 1; r--) {
     for (var c = 1; c <= 7; c++) {
-      var rowNum = 6-r;
-      var col = board[c-1];
+      var rowNum = 6 - r;
+      var col = board[c - 1];
       var len = col.length;
-      show[rowNum].push(r > len ? EMPTY : col[r-1]);
+      show[rowNum].push(r > len ? EMPTY : col[r - 1]);
     }
   }
 
   // Print the board
   console.clear();
-  for (var r in show){
+  for (var r in show) {
     const row = show[r];
     for (var c in row) {
       const col = row[c];
-      print(`${c == 0 ? '' : ' '}${col}`);
+      print(`${c == 0 ? "" : " "}${col}`);
     }
-    print('\n');
+    print("\n");
   }
-  console.log(chalk.green('1 2 3 4 5 6 7'));
+  console.log(chalk.green("1 2 3 4 5 6 7"));
 }
 
 function print(c) {
@@ -69,10 +61,9 @@ function print(c) {
 
 showBoard();
 
-while(true) {
+while (true) {
   var col = prompt(`Player ${getPiece()}: `);
-  if (addPiece(parseInt(col)))
-  {
+  if (addPiece(parseInt(col))) {
     showBoard();
   }
 }
