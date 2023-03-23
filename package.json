@@ -1,0 +1,19 @@
+{
+  "name": "connect4",
+  "version": "1.0.0",
+  "description": "A Connect 4 game written to run on nodejs.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Salinas and Aiden Sanchez",
+  "license": "ISC",
+  "bin": {
+    "connect4": "./index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "prompt-sync": "^4.2.0"
+  }
+}
