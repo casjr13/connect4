@@ -17,6 +17,10 @@ const board = [
 ];
 
 function addPiece(col) {
+  if (isNaN(col)) {
+    return false;
+  }
+
   const c = col - 1;
 
   if (c < 0 || c > 6) {
