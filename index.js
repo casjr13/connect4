@@ -4,7 +4,11 @@ import chalk from 'chalk';
 import promptSync from 'prompt-sync';
 const prompt = promptSync({ sigint: true });
 
-let piece = true;
+const EMPTY = chalk.gray('.');
+const P1 = chalk.red('O');
+const P2 = chalk.blue('O');
+let turn = true;
+const getPiece = () => turn ? P1 : P2;
 
 const board = [
   [],
@@ -23,46 +27,40 @@ function addPiece(col) {
 
   const c = col - 1;
 
-  if (c < 0 || c > 6) {
+  if (c < 0 || c > 6 || board[c].length >= 6) {
     console.log(chalk.red("Can't go there"));
     return false;
   }
 
-  if (board[c].length >= 6) {
-    console.log(chalk.red("Can't go there"));
-    return false;
-  }
-
-  board[c].push(piece ? chalk.red('x') : chalk.blue('o'));
-  piece = !piece;
+  board[c].push(getPiece());
+  turn = !turn;
   return true;
 }
 
 function showBoard() {
   var show = [[],[],[],[],[],[]];
 
+  // Convert board into something we can print
   for (var r = 6; r >= 1; r--) {
     for (var c = 1; c <= 7; c++) {
       var rowNum = 6-r;
       var col = board[c-1];
       var len = col.length;
-      show[rowNum].push(r > len ? '.' : col[r-1]);
+      show[rowNum].push(r > len ? EMPTY : col[r-1]);
     }
   }
 
+  // Print the board
+  console.clear();
   for (var r in show){
     const row = show[r];
-    print(r);
-
     for (var c in row) {
       const col = row[c];
-      print(` ${col}`);
+      print(`${c == 0 ? '' : ' '}${col}`);
     }
-
     print('\n');
   }
-
-  console.log('  1 2 3 4 5 6 7');
+  console.log(chalk.green('1 2 3 4 5 6 7'));
 }
 
 function print(c) {
@@ -72,7 +70,7 @@ function print(c) {
 showBoard();
 
 while(true) {
-  var col = prompt(`Player ${piece ? 'x' : 'o'}: `);
+  var col = prompt(`Player ${getPiece()}: `);
   if (addPiece(parseInt(col)))
   {
     showBoard();
